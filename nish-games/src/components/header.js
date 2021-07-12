@@ -5,7 +5,7 @@ const Header = () => {
     <div className="header">
       <h1>Nish's Game Reviews </h1>
       <span className="login">
-        <Link>Log In</Link>
+        <Link to="/login">Log In</Link>
       </span>
     </div>
   );

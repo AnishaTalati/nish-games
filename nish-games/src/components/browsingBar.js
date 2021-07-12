@@ -7,8 +7,8 @@ const BrowsingBar = () => {
         <Link to="/">All Reviews</Link>
         <Link to="/">By Category</Link>
         <Link to="/">By Game</Link>
-        <Link>By Author</Link>
-        <Link>Most Popular</Link>
+        <Link to="/">By Author</Link>
+        <Link to="/">Most Popular</Link>
       </h2>
     </div>
   );

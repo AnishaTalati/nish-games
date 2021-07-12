@@ -8,3 +8,8 @@ export const getReviews = async () => {
   const { data } = await reviewsApi.get("/reviews");
   return data.reviews;
 };
+
+export const getUsers = async () => {
+  const { data } = await reviewsApi.get("/users");
+  return data.users;
+};

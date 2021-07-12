@@ -36,3 +36,11 @@ body {
   display: inline-block;
   margin-top: 20px;
 }
+.users-list {
+  display: inline-block;
+}
+
+.user-image {
+  width: 100px;
+  height: 100px;
+}

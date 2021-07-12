@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Header from "./components/header";
 import BrowsingBar from "./components/browsingBar";
 import Reviews from "./components/reviews";
+import UsersList from "./components/usersList";
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Reviews />
+        </Route>
+        <Route exact path="/login">
+          <UsersList />
         </Route>
       </Switch>
     </div>

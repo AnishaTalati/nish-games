@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
+import { UserContext } from "../contexts/user";
+import { useContext } from "react";
 
 const Header = () => {
+  const { user } = useContext(UserContext);
   return (
     <div className="header">
       <a href="/">
         <h1>Nish's Game Reviews </h1>
       </a>
-      <span className="login">
-        <a href="/login">Log In</a>
-      </span>
+      <p className="login">
+        <Link to="/login">Login</Link>
+      </p>
     </div>
   );
 };

@@ -19,7 +19,7 @@ const BrowsingBar = ({ reviews }) => {
           <div className="dropdown-content">
             {categories.map((category) => {
               return (
-                <a key={category.slug} href={`/${category.slug}`}>
+                <a key={category.slug} href={`/reviews/${category.slug}`}>
                   {category.slug}
                 </a>
               );
@@ -31,7 +31,7 @@ const BrowsingBar = ({ reviews }) => {
           <div className="dropdown-content">
             {reviews.map((review) => {
               return (
-                <a key={review.review_id} href={`/${review.owner}`}>
+                <a key={review.review_id} href={`/reviews/${review.owner}`}>
                   {review.owner}
                 </a>
               );
@@ -40,7 +40,7 @@ const BrowsingBar = ({ reviews }) => {
         </DropDown>
         <DropDown>
           <div className="dropbtn">
-            <Link to="/most-pop">Most Popular</Link>
+            <Link to="/reviews/:votes">Most Popular</Link>
           </div>
         </DropDown>
       </h2>

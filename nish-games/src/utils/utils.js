@@ -9,7 +9,7 @@ export const getCategories = async () => {
   return data.categories;
 };
 
-export const getReviews = async (category) => {
+export const getReviews = async (category, owner) => {
   const { data } = await reviewsApi.get("/reviews", {
     params: { category: category },
   });

@@ -6,6 +6,7 @@ import BrowsingBar from "./components/browsingBar";
 import Reviews from "./components/reviews";
 import UsersList from "./components/usersList";
 import ReviewPage from "./components/reviewPage";
+import Login from "./components/login";
 
 function App() {
   const [reviews, setReviews] = useState([]);
@@ -18,14 +19,20 @@ function App() {
         <Route exact path="/">
           <Reviews reviews={reviews} setReviews={setReviews} />
         </Route>
-        <Route exact path="/reviews/:category">
+        <Route exact path="/:category">
+          <Reviews reviews={reviews} setReviews={setReviews} />
+        </Route>
+        <Route exact path="/:owner">
           <Reviews reviews={reviews} setReviews={setReviews} />
         </Route>
         <Route exact path="/login">
           <UsersList />
         </Route>
-        <Route exact path="/reviews/:review_id">
+        <Route exact path="/:review_id">
           <ReviewPage useParams={useParams} />
+        </Route>
+        <Route exact path="/login">
+          <Login />
         </Route>
       </Switch>
     </div>

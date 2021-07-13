@@ -4,6 +4,7 @@ import Comments from "./comments";
 const ReviewPage = ({ useParams }) => {
   const { review_id } = useParams();
   const [review, setReview] = useState([]);
+
   useEffect(() => {
     fetch(`https://nc-games-app.herokuapp.com/api/reviews/${review_id}`)
       .then((response) => response.json())

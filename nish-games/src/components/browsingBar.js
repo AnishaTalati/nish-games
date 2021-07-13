@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { getReviews } from "../utils/utils";
 import { getCategories } from "../utils/utils";
 import { useEffect, useState } from "react";
 
-const BrowsingBar = () => {
+const BrowsingBar = ({ reviews }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -16,26 +15,32 @@ const BrowsingBar = () => {
     <div className="browsing-bar">
       <h2>
         <DropDown>
-          <button class="dropbtn">Search Review By Category</button>
-          <div class="dropdown-content">
+          <button className="dropbtn">Review By Category</button>
+          <div className="dropdown-content">
             {categories.map((category) => {
-              return <a href={`/reviews/${category.slug}`}>{category.slug}</a>;
+              return (
+                <a key={category.slug} href={`/${category.slug}`}>
+                  {category.slug}
+                </a>
+              );
             })}
           </div>
         </DropDown>
         <DropDown>
-          <button class="dropbtn">Search Review By Owner</button>
-          <div class="dropdown-content">
-            {categories.map((category) => {
-              return <a href={`/reviews/${category.slug}`}>{category.slug}</a>;
+          <button className="dropbtn">Review By Owner</button>
+          <div className="dropdown-content">
+            {reviews.map((review) => {
+              return (
+                <a key={review.review_id} href={`/${review.owner}`}>
+                  {review.owner}
+                </a>
+              );
             })}
           </div>
         </DropDown>
-
-        <Link to="/">By Game</Link>
         <DropDown>
           <div className="dropbtn">
-            <Link to="/">Most Popular</Link>
+            <Link to="/most-pop">Most Popular</Link>
           </div>
         </DropDown>
       </h2>

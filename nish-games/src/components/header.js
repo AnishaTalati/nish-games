@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div className="header">
-      <Link to="/">
+      <a href="/">
         <h1>Nish's Game Reviews </h1>
-      </Link>
+      </a>
       <span className="login">
-        <Link to="/login">Log In</Link>
+        <a href="/login">Log In</a>
       </span>
     </div>
   );

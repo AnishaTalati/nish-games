@@ -13,7 +13,6 @@ const Reviews = ({ reviews, setReviews }) => {
 
   return (
     <div>
-      <h2>Reviews</h2>
       <ul className="reviews-list">
         {reviews.map((review) => {
           return (

@@ -27,8 +27,21 @@ body {
 .reviews-list {
   display: grid;
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+}
+.reviews {
+  padding: 20px;
+  border: 5px solid rgb(46, 46, 170);
+  margin: 10px 40% 10px 40%;
+  background-color: rgb(195, 232, 245);
+}
+.review-img {
+  width: 170px;
+  height: 150px;
+  margin: 10px;
+}
+h4 {
+  margin: auto;
+  font-size: large;
 }
 
 .login {

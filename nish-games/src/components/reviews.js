@@ -1,14 +1,16 @@
 import { getReviews } from "../utils/utils";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-const Reviews = () => {
-  const [reviews, setReviews] = useState([]);
+const Reviews = ({ reviews, setReviews }) => {
+  const { category } = useParams();
+
   useEffect(() => {
-    getReviews().then((response) => {
+    getReviews(category).then((response) => {
       setReviews(response);
     });
   }, []);
+
   return (
     <div>
       <h2>Reviews</h2>

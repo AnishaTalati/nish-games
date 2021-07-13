@@ -20,11 +20,19 @@ const ReviewPage = ({ useParams }) => {
             <h2 key={info.review_id}>{info.title}</h2>
             <p>{info.review_body}</p>
             <p>{info.designer}</p>
-            <p>{info.category}</p>
-            <p>{info.owner}</p>
-            <p>{info.votes}</p>
-            <p>{info.comment_count}</p>
-            <Comments review_id={review_id} />
+            <p>
+              Category: {info.category} <br />
+              <button>More reviews from this category</button>
+            </p>
+            <p>
+              {info.owner}
+              <br />
+              <button>More Reviews from this Owner</button>
+            </p>
+            <p>
+              Votes: {info.votes} <button>Up Vote</button>
+            </p>
+            <Comments review={review} />
           </span>
         );
       })}

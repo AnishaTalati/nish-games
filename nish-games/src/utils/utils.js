@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const reviewsApi = axios.create({
   baseURL: "https://nc-games-app.herokuapp.com/api",
@@ -9,11 +10,13 @@ export const getCategories = async () => {
   return data.categories;
 };
 
-export const getReviews = async (category, owner) => {
-  const { data } = await reviewsApi.get("/reviews", {
-    params: { category: category },
-  });
-  return data.reviews;
+export const getReviews = async (category, query = null) => {
+  if (query === null) {
+    const { data } = await reviewsApi.get(`/reviews`, {
+      params: { category: category, sort_by: query },
+    });
+    return data.reviews;
+  }
 };
 
 export const getUsers = async () => {

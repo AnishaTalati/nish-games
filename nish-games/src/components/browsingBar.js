@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { getCategories } from "../utils/utils";
+import { getCategories, sortReviews } from "../utils/utils";
 import { useEffect, useState } from "react";
 
-const BrowsingBar = ({ reviews }) => {
+const BrowsingBar = ({ reviews, setQuery }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -39,8 +39,11 @@ const BrowsingBar = ({ reviews }) => {
           </div>
         </DropDown>
         <DropDown>
-          <div className="dropbtn">
-            <Link to="/reviews/:votes">Most Popular</Link>
+          <button className="dropbtn">Sort By</button>
+          <div className="dropdown-content">
+            <a href={`/reviews/order_by=asc`}>Most Recent</a>
+            <a href={`/reviews?sort_by=votes`}>Most Popular</a>
+            <a href={`/reviews?sort_by=comments`}>Most Comments</a>
           </div>
         </DropDown>
       </h2>

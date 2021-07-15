@@ -1,5 +1,4 @@
 import { useState } from "react";
-import AddComment from "./addComment";
 
 const Comments = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);

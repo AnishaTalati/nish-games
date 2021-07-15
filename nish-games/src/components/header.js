@@ -10,7 +10,6 @@ const Header = () => {
       <a href="/">
         <h1>Nish's Game Reviews </h1>
       </a>
-
       <p className="login">
         <Link to="/login">Login</Link>
       </p>

@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { getCategories, sortReviews } from "../utils/utils";
 import { useEffect, useState } from "react";
+import showQueryReviews from "../hooks/showQueryReviews";
 
-const BrowsingBar = ({ reviews, setQuery }) => {
+const BrowsingBar = ({ reviews }) => {
   const [categories, setCategories] = useState([]);
+  const [query, setQuery] = useState("");
+  const { queryReviews: queryReviews } = showQueryReviews(query);
 
   useEffect(() => {
     getCategories().then((data) => {
@@ -41,7 +44,17 @@ const BrowsingBar = ({ reviews, setQuery }) => {
         <DropDown>
           <button className="dropbtn">Sort By</button>
           <div className="dropdown-content">
-            <a href={`/reviews/order_by=asc`}>Most Recent</a>
+            <a
+              href={`/reviews?order_by=asc`}
+              onClick={() => {
+                const string = "order_by=asc";
+                setQuery(string);
+                showQueryReviews(query);
+                return queryReviews.map((review) => <div>{review.title}</div>);
+              }}
+            >
+              Most Recent
+            </a>
             <a href={`/reviews?sort_by=votes`}>Most Popular</a>
             <a href={`/reviews?sort_by=comments`}>Most Comments</a>
           </div>

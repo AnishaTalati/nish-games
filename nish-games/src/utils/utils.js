@@ -10,13 +10,11 @@ export const getCategories = async () => {
   return data.categories;
 };
 
-export const getReviews = async (category, query = null) => {
-  if (query === null) {
-    const { data } = await reviewsApi.get(`/reviews`, {
-      params: { category: category, sort_by: query },
-    });
-    return data.reviews;
-  }
+export const getReviews = async (category) => {
+  const { data } = await reviewsApi.get(`/reviews`, {
+    params: { category: category },
+  });
+  return data.reviews;
 };
 
 export const getUsers = async () => {
@@ -44,6 +42,16 @@ export const patchCommentVotes = (review_id, comment_id, increment) => {
     });
 };
 
-export const postComment = (username, body) => {
-  return;
+export const postComment = (review_id, comment) => {
+  return reviewsApi
+    .post(`/reviews/${review_id}/comments`, comment)
+    .then((response) => {
+      console.log(response);
+    });
+};
+
+export const getReviewsByQuery = (query) => {
+  return reviewsApi.get(`/reviews?${query}`).then((response) => {
+    return response.data;
+  });
 };

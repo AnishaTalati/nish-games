@@ -15,20 +15,13 @@ function App() {
     avatar_url: "https://i.imgur.com/WfX0Neu.jpg",
     name: "Peter Messy",
   });
-  const [query, setQuery] = useState(null);
-
-  console.log(user);
 
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ user, setUser }}>
         <div className="App">
           <Header />
-          <BrowsingBar
-            reviews={reviews}
-            setReviews={setReviews}
-            setQuery={setQuery}
-          />
+          <BrowsingBar reviews={reviews} setReviews={setReviews} />
           <Switch>
             <Route exact path="/">
               <Reviews reviews={reviews} setReviews={setReviews} />
@@ -38,9 +31,6 @@ function App() {
             </Route>
             <Route exact path="/reviews/:owner">
               <Reviews reviews={reviews} setReviews={setReviews} />
-            </Route>
-            <Route exact path="/reviews/:query">
-              <Reviews useParams={useParams} />
             </Route>
             <Route exact path="/reviews/:category/:review_id">
               <ReviewPage useParams={useParams} />

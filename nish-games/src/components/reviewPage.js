@@ -4,21 +4,20 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/user";
 import Votes from "./Votes";
 import CommentVotes from "./CommentVotes";
-import AddComment from "./addComment";
+import { postComment } from "../utils/utils";
 
 const ReviewPage = ({ useParams }) => {
   const { review_id } = useParams();
   const [review, setReview] = useState([]);
   const [comments, setComments] = useState([]);
   const { user } = useContext(UserContext);
-  let username = user.username;
+
   const [commentBody, setCommentBody] = useState("");
 
   useEffect(() => {
     fetch(`https://nc-games-app.herokuapp.com/api/reviews/${review_id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setReview(data.review);
       });
   }, [review_id]);
@@ -57,14 +56,39 @@ const ReviewPage = ({ useParams }) => {
             </p>
             <Votes review_id={info.review_id} votes={info.votes} />
             <br />
-            <AddComment>
-              <form>
+            <div>
+              <h3>Leave a Comment</h3>
+              <form
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  const comment = {
+                    username: user.username,
+                    body: commentBody,
+                  };
+
+                  postComment(info.review_id, comment)
+                    .then((comment) => {
+                      setComments((currComments) => {
+                        const newComments = [comment, ...currComments];
+                        return newComments;
+                      });
+                    })
+                    .catch((err) => {
+                      console.log(err.response.data);
+                    });
+                }}
+              >
                 <label id="review-body">
-                  <textarea id="review-body" value></textarea>
+                  <textarea
+                    id="review-body"
+                    value={commentBody}
+                    onChange={(event) => setCommentBody(event.target.value)}
+                  ></textarea>
                 </label>
                 <button>Submit Comment</button>
               </form>
-            </AddComment>
+            </div>
+
             <br />
             <Comments review={review}>
               {" "}
@@ -89,10 +113,6 @@ const ReviewPage = ({ useParams }) => {
       })}
     </div>
   );
-};
-
-const DropDown = ({ children }) => {
-  return <div className="dropdown">{children}</div>;
 };
 
 export default ReviewPage;

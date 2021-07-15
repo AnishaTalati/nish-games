@@ -4,10 +4,9 @@ import { Link, useParams } from "react-router-dom";
 
 const Reviews = ({ reviews, setReviews }) => {
   const { category } = useParams();
-  const { query } = useParams();
 
   useEffect(() => {
-    getReviews(category, query).then((response) => {
+    getReviews(category).then((response) => {
       setReviews(response);
     });
   }, []);

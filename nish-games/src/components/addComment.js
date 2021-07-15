@@ -1,7 +1,6 @@
 import { useState } from "react";
-import AddComment from "./addComment";
 
-const Comments = ({ children }) => {
+const AddComment = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleIsOpen = () => {
@@ -10,12 +9,9 @@ const Comments = ({ children }) => {
 
   return (
     <div>
-      <button onClick={toggleIsOpen}>
-        {isOpen ? "Hide Comments" : "Show Comments"}
-      </button>
+      <button onClick={toggleIsOpen}>Leave a Comment!</button>
       {isOpen ? children : null}
     </div>
   );
 };
-
-export default Comments;
+export default AddComment;

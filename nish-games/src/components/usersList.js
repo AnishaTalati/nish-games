@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/user";
+import { useState, useEffect, useContext } from "react";
 import { getUsers } from "../utils/utils";
 
 const UsersList = () => {
@@ -18,7 +18,7 @@ const UsersList = () => {
       <ul className="users-list">
         {users.map((user) => {
           return (
-            <li className="change-user" key={user.username}>
+            <li className="user-profile" key={user.username}>
               <img
                 className="user-image"
                 src={user.avatar_url}
@@ -26,14 +26,7 @@ const UsersList = () => {
               ></img>
               <br />
               {user.username}
-              <button
-                onClick={(event) => {
-                  event.preventDefault();
-                  setUser(user);
-                }}
-              >
-                Change user
-              </button>
+              <button onClick={() => setUser(user)}>Change user</button>
             </li>
           );
         })}

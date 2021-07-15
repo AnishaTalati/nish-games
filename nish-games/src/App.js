@@ -10,8 +10,14 @@ import ReviewPage from "./components/reviewPage";
 
 function App() {
   const [reviews, setReviews] = useState([]);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    username: "cooljmessy",
+    avatar_url: "https://i.imgur.com/WfX0Neu.jpg",
+    name: "Peter Messy",
+  });
   const [query, setQuery] = useState(null);
+
+  console.log(user);
 
   return (
     <BrowserRouter>

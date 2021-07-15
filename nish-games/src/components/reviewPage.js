@@ -1,19 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Comments from "./comments";
-import useVote from "../hooks/useVote";
 import { Link } from "react-router-dom";
+import { UserContext } from "../contexts/user";
+import Votes from "./Votes";
+import CommentVotes from "./CommentVotes";
+import AddComment from "./addComment";
 
 const ReviewPage = ({ useParams }) => {
   const { review_id } = useParams();
   const [review, setReview] = useState([]);
-  const { votes, incVotes } = useVote(0);
-  const { votes: votes2, incVotes: incVotes2 } = useVote(0);
   const [comments, setComments] = useState([]);
+  const { user } = useContext(UserContext);
+  let username = user.username;
+  const [commentBody, setCommentBody] = useState("");
 
   useEffect(() => {
     fetch(`https://nc-games-app.herokuapp.com/api/reviews/${review_id}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setReview(data.review);
       });
   }, [review_id]);
@@ -32,8 +37,8 @@ const ReviewPage = ({ useParams }) => {
     <div>
       {review.map((info) => {
         return (
-          <span>
-            <h2 key={info.review_id}>{info.title}</h2>
+          <span key={info.review_id}>
+            <h2>{info.title}</h2>
             <p>{info.review_body}</p>
             <p>{info.designer}</p>
             <p>
@@ -50,12 +55,19 @@ const ReviewPage = ({ useParams }) => {
                 More reviews from this category
               </Link>
             </p>
-
-            <p>
-              Votes: {info.votes + votes}{" "}
-              <button onClick={incVotes}>Vote</button>
-            </p>
+            <Votes review_id={info.review_id} votes={info.votes} />
+            <br />
+            <AddComment>
+              <form>
+                <label id="review-body">
+                  <textarea id="review-body" value></textarea>
+                </label>
+                <button>Submit Comment</button>
+              </form>
+            </AddComment>
+            <br />
             <Comments review={review}>
+              {" "}
               {comments.map((comment) => (
                 <p key={comment.comment_id}>
                   {comment.author}
@@ -64,8 +76,11 @@ const ReviewPage = ({ useParams }) => {
                   <br />
                   {comment.body}
                   <br />
-                  Votes: {comment.votes + votes2}
-                  <button onClick={incVotes2}>Vote</button>
+                  <CommentVotes
+                    review_id={info.review_id}
+                    comment_id={comment.comment_id}
+                    votes={comment.votes}
+                  />
                 </p>
               ))}
             </Comments>

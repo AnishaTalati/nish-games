@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/user";
 import Votes from "./Votes";
 import CommentVotes from "./CommentVotes";
-import { postComment } from "../utils/utils";
+import { deleteComment, postComment } from "../utils/utils";
 
 const ReviewPage = ({ useParams }) => {
   const { review_id } = useParams();
@@ -31,6 +31,16 @@ const ReviewPage = ({ useParams }) => {
         setComments(data.comments);
       });
   }, [review_id]);
+
+  const updateComments = (comment_id) => {
+    deleteComment(comment_id).then((response) => {
+      setComments((currComments) => {
+        let newComments = [...currComments];
+        newComments.splice(newComments.indexOf(response), 1);
+        return newComments;
+      });
+    });
+  };
 
   return (
     <div>
@@ -66,16 +76,12 @@ const ReviewPage = ({ useParams }) => {
                     body: commentBody,
                   };
 
-                  postComment(info.review_id, comment)
-                    .then((comment) => {
-                      setComments((currComments) => {
-                        const newComments = [comment, ...currComments];
-                        return newComments;
-                      });
-                    })
-                    .catch((err) => {
-                      console.log(err.response.data);
+                  postComment(info.review_id, comment).then((comment) => {
+                    setComments((currComments) => {
+                      const newComments = [comment, ...currComments];
+                      return newComments;
                     });
+                  });
                 }}
               >
                 <label id="review-body">
@@ -93,19 +99,29 @@ const ReviewPage = ({ useParams }) => {
             <Comments review={review}>
               {" "}
               {comments.map((comment) => (
-                <p key={comment.comment_id}>
-                  {comment.author}
-                  <br />
-                  Created at: {comment.created_at}
-                  <br />
-                  {comment.body}
-                  <br />
-                  <CommentVotes
-                    review_id={info.review_id}
-                    comment_id={comment.comment_id}
-                    votes={comment.votes}
-                  />
-                </p>
+                <div>
+                  <p key={comment.comment_id}>
+                    {comment.author}
+                    <br />
+                    Created at: {comment.created_at}
+                    <br />
+                    {comment.body}
+                    <br />
+                    <CommentVotes
+                      review_id={info.review_id}
+                      comment_id={comment.comment_id}
+                      votes={comment.votes}
+                    />
+                  </p>
+                  <button
+                    onClick={(event) => {
+                      event.preventDefault();
+                      updateComments(comment.comment_id);
+                    }}
+                  >
+                    Delete Comment
+                  </button>
+                </div>
               ))}
             </Comments>
           </span>

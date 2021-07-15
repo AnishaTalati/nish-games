@@ -50,8 +50,8 @@ export const postComment = (review_id, comment) => {
     });
 };
 
-export const getReviewsByQuery = (query) => {
-  return reviewsApi.get(`/reviews?${query}`).then((response) => {
-    return response.data;
+export const deleteComment = (comment_id) => {
+  return reviewsApi.delete(`/comments/${comment_id}`).then((response) => {
+    console.log(response.data);
   });
 };

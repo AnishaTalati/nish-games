@@ -2,15 +2,8 @@ import { UserContext } from "../contexts/user";
 import { useState, useEffect, useContext } from "react";
 import { getUsers } from "../utils/utils";
 
-const UsersList = () => {
-  const [users, setUsers] = useState([]);
+const UsersList = ({ users, setUsers }) => {
   const { setUser } = useContext(UserContext);
-
-  useEffect(() => {
-    getUsers().then((response) => {
-      setUsers(response);
-    });
-  }, []);
 
   return (
     <section>

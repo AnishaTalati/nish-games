@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import { getCategories, sortReviews } from "../utils/utils";
 import { useEffect, useState } from "react";
-import showQueryReviews from "../hooks/showQueryReviews";
 
-const BrowsingBar = ({ reviews }) => {
+const BrowsingBar = ({ users, setUsers }) => {
   const [categories, setCategories] = useState([]);
   const [query, setQuery] = useState("");
-  const { queryReviews: queryReviews } = showQueryReviews(query);
 
   useEffect(() => {
     getCategories().then((data) => {
@@ -32,10 +30,10 @@ const BrowsingBar = ({ reviews }) => {
         <DropDown>
           <button className="dropbtn">Review By Owner</button>
           <div className="dropdown-content">
-            {reviews.map((review) => {
+            {users.map((user) => {
               return (
-                <a key={review.review_id} href={`/reviews/${review.owner}`}>
-                  {review.owner}
+                <a key={user.username} href={`/reviews/${user.username}`}>
+                  {user.username}
                 </a>
               );
             })}
@@ -49,8 +47,6 @@ const BrowsingBar = ({ reviews }) => {
               onClick={() => {
                 const string = "order_by=asc";
                 setQuery(string);
-                showQueryReviews(query);
-                return queryReviews.map((review) => <div>{review.title}</div>);
               }}
             >
               Most Recent

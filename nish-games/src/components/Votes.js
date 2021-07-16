@@ -5,11 +5,10 @@ const Votes = ({ review_id, votes }) => {
   const [votesChange, setVotes] = useState(0);
 
   const incVotes = () => {
-    patchVotes(review_id, 1).then(() => {
-      setVotes((currVotes) => {
-        return currVotes + 1;
-      });
+    setVotes((currVotes) => {
+      return currVotes + 1;
     });
+    patchVotes(review_id, 1).then(() => {});
   };
 
   return (

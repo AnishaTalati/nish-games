@@ -42,13 +42,21 @@ function App() {
             <Route exact path="/reviews/:category">
               <Reviews reviews={reviews} setReviews={setReviews} />
             </Route>
-            <Route exact path="/reviews/:query">
-              <Reviews reviews={reviews} setReviews={setReviews} />
+            <Route exact path="/reviews/all/:query">
+              <Reviews
+                reviews={reviews}
+                setReviews={setReviews}
+                useParams={useParams}
+              />
             </Route>
-            <Route exact path="/reviews/:owner">
-              <Reviews reviews={reviews} setReviews={setReviews} />
+            <Route exact path="/users/:user/reviews">
+              <Reviews
+                reviews={reviews}
+                setReviews={setReviews}
+                useParams={useParams}
+              />
             </Route>
-            <Route exact path="/reviews/:category/:review_id">
+            <Route exact path="/reviews/review/:review_id">
               <ReviewPage useParams={useParams} />
             </Route>
             <Route exact path="/login">

@@ -10,25 +10,23 @@ export const getCategories = async () => {
   return data.categories;
 };
 
-export const getReviews = async (params) => {
-  const categories = [
-    "strategy",
-    "hidden-roles",
-    "dexterity",
-    "push-your-luck",
-    "roll-and-write",
-    "deck-building",
-    "engine-building",
-  ];
-  if (categories.includes(params)) {
+export const getReviews = async (category, query, user) => {
+  if (category) {
     const { data } = await reviewsApi.get(`/reviews`, {
-      params: { category: params },
+      params: {
+        category: category,
+      },
     });
     return data.reviews;
+  } else if (query) {
+    const { data } = await reviewsApi.get(`/reviews?${query}`);
+    return data.reviews;
+  } else if (user) {
+    const { data } = await reviewsApi.get(`/reviews`);
+    const reviews = data.reviews;
+    return reviews.filter((review) => review.owner === user);
   } else {
-    const { data } = await reviewsApi.get(`/reviews?${params}`, {
-      params,
-    });
+    const { data } = await reviewsApi.get(`/reviews`);
     return data.reviews;
   }
 };
@@ -63,6 +61,7 @@ export const postComment = (review_id, comment) => {
     .post(`/reviews/${review_id}/comments`, comment)
     .then((response) => {
       console.log(response);
+      return response.data.comment;
     });
 };
 

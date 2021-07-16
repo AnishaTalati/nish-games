@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/user";
 import Votes from "./Votes";
 import CommentVotes from "./CommentVotes";
-import { deleteComment, postComment } from "../utils/utils";
+import { deleteComment, postComment, updateComments } from "../utils/utils";
 
 const ReviewPage = ({ useParams }) => {
   const { review_id } = useParams();
   const [review, setReview] = useState([]);
   const [comments, setComments] = useState([]);
   const { user } = useContext(UserContext);
-
   const [commentBody, setCommentBody] = useState("");
 
   useEffect(() => {

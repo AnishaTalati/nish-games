@@ -4,6 +4,15 @@ import { Link, useParams } from "react-router-dom";
 
 const Reviews = ({ reviews, setReviews }) => {
   const { category } = useParams();
+  const categories = [
+    "strategy",
+    "hidden-roles",
+    "dexterity",
+    "push-your-luck",
+    "roll-and-write",
+    "deck-building",
+    "engine-building",
+  ];
 
   useEffect(() => {
     getReviews(category).then((response) => {
@@ -14,7 +23,9 @@ const Reviews = ({ reviews, setReviews }) => {
   return (
     <div>
       <h2>
-        {category ? `Showing ${category} Reviews` : `Showing All Reviews`}
+        {categories.includes(category)
+          ? `Showing ${category} Reviews`
+          : `Showing All Reviews`}
       </h2>
       <ul className="reviews-list">
         {" "}

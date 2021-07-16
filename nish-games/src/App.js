@@ -42,6 +42,9 @@ function App() {
             <Route exact path="/reviews/:category">
               <Reviews reviews={reviews} setReviews={setReviews} />
             </Route>
+            <Route exact path="/reviews/:query">
+              <Reviews reviews={reviews} setReviews={setReviews} />
+            </Route>
             <Route exact path="/reviews/:owner">
               <Reviews reviews={reviews} setReviews={setReviews} />
             </Route>

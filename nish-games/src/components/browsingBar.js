@@ -42,17 +42,9 @@ const BrowsingBar = ({ users, setUsers }) => {
         <DropDown>
           <button className="dropbtn">Sort By</button>
           <div className="dropdown-content">
-            <a
-              href={`/reviews?order_by=asc`}
-              onClick={() => {
-                const string = "order_by=asc";
-                setQuery(string);
-              }}
-            >
-              Most Recent
-            </a>
-            <a href={`/reviews?sort_by=votes`}>Most Popular</a>
-            <a href={`/reviews?sort_by=comments`}>Most Comments</a>
+            <a href={`/reviews/order_by=asc`}>Most Recent</a>
+            <a href={`/reviews/sort_by=votes`}>Most Popular</a>
+            <a href={`/reviews/sort_by=comments`}>Most Comments</a>
           </div>
         </DropDown>
       </h2>

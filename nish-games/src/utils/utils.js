@@ -10,11 +10,27 @@ export const getCategories = async () => {
   return data.categories;
 };
 
-export const getReviews = async (category) => {
-  const { data } = await reviewsApi.get(`/reviews`, {
-    params: { category: category },
-  });
-  return data.reviews;
+export const getReviews = async (params) => {
+  const categories = [
+    "strategy",
+    "hidden-roles",
+    "dexterity",
+    "push-your-luck",
+    "roll-and-write",
+    "deck-building",
+    "engine-building",
+  ];
+  if (categories.includes(params)) {
+    const { data } = await reviewsApi.get(`/reviews`, {
+      params: { category: params },
+    });
+    return data.reviews;
+  } else {
+    const { data } = await reviewsApi.get(`/reviews?${params}`, {
+      params,
+    });
+    return data.reviews;
+  }
 };
 
 export const getUsers = async () => {
